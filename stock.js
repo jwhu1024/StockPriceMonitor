@@ -1,11 +1,11 @@
 // http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_3474.tw_20140801&json=1&delay=0
 var http = require('http'),
-	dateFormat = require('dateformat');
+    dateFormat = require('dateformat');
 
 STOCK_PREFIX 	= "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_"
-STOCK_NUM 		= "2455";
+STOCK_NUM 	= "2455";
 STOCK_INFIX 	= ".tw_";
-STOCK_DATE 		= dateFormat(new Date(), "yyyymmdd");
+STOCK_DATE 	= dateFormat(new Date(), "yyyymmdd");
 STOCK_SUFFIX 	= "&json=1&delay=0"
 
 STOCK_THRESHOLD = 0;
