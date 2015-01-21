@@ -15,19 +15,24 @@ strUrl = STOCK_PREFIX + STOCK_CODE + STOCK_INFIX + STOCK_DATE + STOCK_SUFFIX;
 
 console.log('URL we ready to Get : \n' + strUrl);
 
+var data = '';
 setInterval(function() {
 	http.get(strUrl, function(res) {
 		res.on("data", function(chunk) {
+			data += chunk;
+		});
+		res.on("end", function(){
 			var timeStamp = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
-
-			var string = JSON.parse(chunk);
+			var string = JSON.parse(data);
+			
 			console.log('[' + timeStamp + ']' + 
-						' Stock Code\t:' + string.msgArray[0].c +'  |  ' +
+						' Stock Code\t:' + string.msgArray[0].c + '  |  ' +
 						'Stock Price\t:' + string.msgArray[0].z);
 
 			if (STOCK_THRESHOLD > 0 && STOCK_THRESHOLD >= string.msgArray[0].z) {
 				console.log('Threshold Arrived!!!');
 			}
+			data = '';
 		});
 	}).on('error', function(e) {
 		console.log("Got error: " + e.message);
