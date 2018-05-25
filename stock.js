@@ -43,11 +43,10 @@ function printInOneLine(string) {
 }
 
 // entry
-getCookies(function(err, cookie) {
-    if (!err) {
-        // console.log('Get the cookie --> ' + cookie);
-
-        setInterval(function() {
+setInterval(function() {
+	getCookies(function(err, cookie) {
+		if (!err) {
+			// console.log('Get the cookie --> ' + cookie);
             getStockInfo(cookie, function(res) {
                 var fullData = res;
 
@@ -63,8 +62,8 @@ getCookies(function(err, cookie) {
                     printInOneLine("waiting for retry in " + QUERY_TIMEOUT / 1000 + " seconds...");
                 }
             });
-        }, QUERY_TIMEOUT);
-    } else {
-        console.log("get cookie error");
-    }
-});
+		} else {
+			console.log("get cookie error");
+		}
+	});
+}, QUERY_TIMEOUT);
